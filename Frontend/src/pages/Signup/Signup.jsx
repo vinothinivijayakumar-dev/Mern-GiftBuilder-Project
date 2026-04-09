@@ -51,7 +51,7 @@ function Signup() {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/auth/signup", {
+      await axios.post("https://giftbuilder-backend.onrender.com/api/auth/signup", {
         name: form.firstName + " " + form.lastName,
         email: form.email,
         password: form.password
