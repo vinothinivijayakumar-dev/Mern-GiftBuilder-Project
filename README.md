@@ -9,7 +9,7 @@
 
 ## Demo
 
-![GiftBuilder Demo](./demo.gif.mp4)
+![GiftBuilder Demo](./demo.gif)
 
 ---
 
