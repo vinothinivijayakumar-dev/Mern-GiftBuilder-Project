@@ -29,7 +29,7 @@ function App() {
       <Routes>
 
         {/* DEFAULT */}
-        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/" element={<Navigate to={user ? "/home" : "/login"} />} />
 
         {/* AUTH */}
         <Route

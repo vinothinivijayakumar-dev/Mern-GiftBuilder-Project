@@ -8,6 +8,7 @@ import { AuthContext } from "../../context/AuthContext";
 function Navbar() {
 
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef();
 
   const { wishlist } = useContext(WishlistContext);
   const { cartItems } = useContext(CartContext);
@@ -29,9 +30,20 @@ function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    const handleClickOutsideMenu = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutsideMenu);
+    return () => document.removeEventListener("mousedown", handleClickOutsideMenu);
+  }, []);
+
   return (
 
-    <nav className="nav">
+    <nav className="nav" ref={menuRef}>
       <h2 className="logo">
         <FaGift className="logo-icon" /> GiftBuilder
       </h2>

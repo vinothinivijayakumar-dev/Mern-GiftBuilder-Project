@@ -8,6 +8,7 @@ import googleIcon from "../../assets/images/google-icon.png";
 
 function Login() {
 
+  const [loading] = useState(false);
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -54,6 +55,8 @@ function Login() {
       return;
     }
 
+    const loadingToast = toast.loading("Logging in...");
+
     try {
       const res = await axios.post(
         "https://giftbuilder-backend.onrender.com/api/auth/login",
@@ -62,12 +65,12 @@ function Login() {
 
       login(res.data);
 
-      toast.success("Login successful");
+      toast.success("Login successful", { id: loadingToast });
 
       navigate("/home");
 
     } catch (err) {
-      toast.error(err.response?.data || "Invalid email or password");
+      toast.error(err.response?.data || "Invalid email or password", { id: loadingToast });
     }
   };
 

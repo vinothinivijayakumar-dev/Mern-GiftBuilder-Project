@@ -4,7 +4,10 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
 
   // Load user from localStorage on refresh
   useEffect(() => {
@@ -16,9 +19,9 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   // LOGIN
-  const login = (data) => {
-    setUser(data);
-    localStorage.setItem("user", JSON.stringify(data));
+  const login = (userData) => {
+    setUser(userData);
+    localStorage.setItem("user", JSON.stringify(userData));
   };
 
   // LOGOUT
